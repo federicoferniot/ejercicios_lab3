@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculadora</title>
+	<script src="./funciones.js"></script>
+	<link rel="stylesheet" href="./hojaEstilos.css">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="./html5.html">Link1</a></li>
+				<li><a href="#">Link2</a></li>
+				<li><a href="#">Link3</a></li>
+				<li><a href="#">Link4</a></li>
+				<p>Estilo rojo</p>
+				<p class="negrita otraClase">Estilo negrita y otra clase</p>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<section>
+			<article>
+				<h1>Calculadora</h1>
+				<fieldset>
+					<legend>Sumar Numeros</legend>
+					<label id="lblMensajeSumador">Se debe ingresar dos numeros y hacer click en el boton sumar para ver el resultado.</label>
+					<br>
+					<input type="number" id="primerNumero">
+					<label class="operador">+</label>
+					<input type="number" id="segundoNumero">
+					<input type="button" class="boton verde" id="btnSumar" value="Sumar">
+					<input type="button" class="boton rojo" id="btnSumarYGuardar" value="Sumar y Guardar"><hr>
+					Resultado: 
+					<input type="number" id="inpResultado"><hr>
+					<table border=1>
+						<thead>
+							<th>Numero1</th>
+							<th>Numero2</th>
+							<th>Numero3</th>
+						</thead>
+						<tbody id="tbodyResultado">
+						</tbody>
+					</table>
+				</fieldset>
+			</article>
+		</section>
+	</main>
+	<footer>
+		
+	</footer>
+
+</body>
+</html>

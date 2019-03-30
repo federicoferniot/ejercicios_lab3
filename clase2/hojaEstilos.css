@@ -1,0 +1,39 @@
+p{
+	color: red;
+}
+
+p.negrita{
+	font-weight: bold; 
+}
+
+p.otraClase{
+	font-size: 10pt;
+	color: black;
+}
+
+input[type='button'].boton{
+	margin: 5px 0px 5px 0px;
+	padding: 0px 5px 0px 5px;
+	color: white;
+	font-weight: bold;
+	font-size: 15pt;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.verde{
+	background-color: green;
+	width: 125px;
+	height: 30px;
+}
+.rojo{
+	background-color: red;
+	width: 180px;
+	height: 30px;
+}
+input[type="number"]{
+	font-weight: bold;
+	text-align: right;
+	margin: 5px 5px 5px 5px;
+	width: 80px;
+	height: 30px;
+}
