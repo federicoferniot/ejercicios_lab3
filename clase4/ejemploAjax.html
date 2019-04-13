@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="./funciones.js"></script>
+    <link rel="stylesheet" href="./hojaEstilos.css">
+    <script>
+        var persona = {nombre="Matias", edad=30};
+        var str = JSON.stringify(persona);
+        var obj = JSON.parse(str);
+    </script>
+</head>
+<body>
+    <label id="lblNombre">User</label><br>
+    <input type="text" class="sinError" id="inpUser" placeholder="User"><br>
+    <label id="lblApellido">Password</label><br>
+    <input type="text" class="sinError" id="inpPassword" placeholder="Password"><br>
+    <input type="button" class="boton verde" id="btnEnviar" value="Enviar">
+</body>
+</html>
