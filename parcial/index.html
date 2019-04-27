@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+	<script src="./funcionesIndex.js"></script>
+	<link rel="stylesheet" href="./hojaEstilos.css">
+</head>
+<body>
+    <header>
+        <input id="btnNewPost" type="button" value="New Post"><br>
+    </header>
+    <main>
+		<div id="divNewPost" class="contenedor" hidden>
+            <h2 value="Write your new post"></h2><br>
+			<input id="btnCerrar" class="cerrar" type="button" value="X"><br>
+			<label id="lblPostTitle">Post Title</label><br>
+			<input type="text" class="sinError" id="inpPostTitle"><br>
+			<label id="lblPostHeader">Post Header</label><br>
+            <input type="text" class="sinError" id="inpPostHeader"><br>
+            <label id="lblPostHeader">Post Text</label><br>
+			<input type="text" class="sinError" id="inpPostText"><br>
+			<input type="button" class="boton verde" id="btnPost" value="Post">
+        </div>
+    </div>
+    <div id="divPosts"></div>
+    <div id="fondo" class="fondo" hidden>
+        <div id="spinner" class="loader" hidden></div>
+    </div>
+    </main>
+</body>
+</html>
