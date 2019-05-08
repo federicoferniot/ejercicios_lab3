@@ -9,105 +9,100 @@ function cargar(){
 }
 
 function cargarPersonas(){
-	xml.onreadystatechange = callback;
-	xml.open("GET", "http://localhost:3000/personas");
-	xml.send();
+	if(localStorage.getItem("personas")==null){
+		xml.onreadystatechange = callback;
+		xml.open("GET", "http://localhost:3000/personas");
+		xml.send();
+	}else{
+		cargarLista();
+	}
 }
 
 
 function callback(){
 	if(xml.readyState===4){
 		if(xml.status===200){
-			var array = JSON.parse(xml.response);
-			tbody = document.getElementById("tbodyPersonas");
-			for(var i=0; i < array.length; i++){
-				/*
-				tbody.innerHTML += 
-				"<tr><td>"+array[i].nombre+"</td>"+
-				"<td>"+array[i].apellido+"</td>"+
-				"<td><a href=''>borrar</a></td><tr>";
-				*/
-				var tr = document.createElement("tr");
-				var columns = Object.keys(array[i]);
-				for(var j=0; j < columns.length; j++){
-					var cel = document.createElement("td");
-					var text = document.createTextNode(array[i][columns[j]]);
-					cel.appendChild(text);
-					tr.appendChild(cel);
-
-				}
-				/*
-				var tdNombre = document.createElement("td");
-				var tdNombreTexto = document.createTextNode(array[i].nombre);
-				tdNombre.appendChild(tdNombreTexto);
-				var tdApellido = document.createElement("td");
-				var tdApellidoTexto = document.createTextNode(array[i].apellido);
-				tdApellido.appendChild(tdApellidoTexto);
-				var href = document.createAttribute("href");
-				var onclick = document.createAttribute("onclick");
-				tr.appendChild(tdNombre);
-				tr.appendChild(tdApellido);
-				*/
-				var tdAccion = document.createElement("td");
-				var aAccion = document.createElement("a");
-				var aAccionTexto = document.createTextNode("borrar");
-				aAccion.appendChild(aAccionTexto);
-				aAccion.setAttribute("href", "");
-				aAccion.addEventListener("click", borrar);
-				tdAccion.appendChild(aAccion);
-				tr.appendChild(tdAccion);
-				tbody.appendChild(tr);
-			}
+			localStorage.setItem("personas", xml.response);
+			cargarLista();
 		}else{
 			alert("Error del servidor"+xml.status);
 		}
 	}
 }
 
+function cargarLista(){
+	array = JSON.parse(localStorage.getItem("personas"));
+	for(var i=0; i < array.length; i++){
+		agregarPersonaLista(array[i]);
+	}
+}
+
+function agregarPersonaLista(persona){
+	tbody = document.getElementById("tbodyPersonas");
+	var tr = document.createElement("tr");
+	var columns = Object.keys(persona);
+	for(var j=0; j < columns.length; j++){
+		var cel = document.createElement("td");
+		cel.setAttribute("name", columns[j]);
+		var text = document.createTextNode(persona[columns[j]]);
+		cel.appendChild(text);
+		tr.appendChild(cel);
+	}
+	var tdAccion = document.createElement("td");
+	var aBorrar = document.createElement("a");
+	var aModificar = document.createElement("a");
+	var aAccionBorrarTexto = document.createTextNode("borrar");
+	var aModificarTexto = document.createTextNode("/editar");
+	aModificar.appendChild(aModificarTexto);
+	aBorrar.appendChild(aAccionBorrarTexto);
+	aBorrar.setAttribute("href", "#");
+	aModificar.setAttribute("href", "#");
+	aBorrar.addEventListener("click", borrar);
+	aModificar.addEventListener("click", modificar);
+	tdAccion.appendChild(aBorrar);
+	tdAccion.appendChild(aModificar);
+	tr.appendChild(tdAccion);
+	tbody.appendChild(tr);
+}
+
 function guardar(){
 	var nombre = document.getElementById("inpNombre");
 	var apellido = document.getElementById("inpApellido");
+	var telefono = document.getElementById("inpTelefono");
+	var fecha = document.getElementById("inpFecha")
 
-	if(nombre.value != "" && apellido.value != ""){
+	if(nombre.value != "" && apellido.value != "" && telefono.value != "" && fecha.value != ""){
+		persona = {
+			"nombre": nombre.value,
+			"apellido": apellido.value,
+			"fecha": fecha.value.split("-").join("/"),
+			"telefono": telefono.value
+		};
 		if(confirm("Desea guardar una persona?"))
 		{
-			tbody = document.getElementById("tbodyPersonas");
-			var tr = document.createElement("tr");
-			var tdNombre = document.createElement("td");
-			var tdNombreTexto = document.createTextNode(nombre.value);
-			tdNombre.appendChild(tdNombreTexto);
-			var tdApellido = document.createElement("td");
-			var tdApellidoTexto = document.createTextNode(apellido.value);
-			tdApellido.appendChild(tdApellidoTexto);
-			var tdAccion = document.createElement("td");
-			var tdAccionText = document.createTextNode("borrar");
-			tdAccion.appendChild(tdAccionText);
-			tr.appendChild(tdNombre);
-			tr.appendChild(tdApellido);
-			tr.appendChild(tdAccion);
-			tbody.appendChild(tr);
-			/*
-			tbody = document.getElementById("tbodyPersonas");
-			tbody.innerHTML += 
-			"<tr><td>"+nombre.value+"</td>"+
-			"<td>"+apellido.value+"</td>"+
-			"<td><a href=''>borrar</a></td><tr>";
-			*/
+			agregarPersonaLista(persona);
 			nombre.className= "sinError";
 			apellido.className= "sinError";
+			telefono.className= "sinError";
 
+			agregarPersonaLocalStorage(persona);
 		}
 	}
 	else{
-		if(nombre==""){
-			document.getElementById("inpNombre").className = "conError";
+		if(nombre.value==""){
+			nombre.className = "conError";
 		}else{
-			document.getElementById("inpNombre").className = "sinError";
+			nombre.className = "sinError";
 		}
-		if(apellido==""){
-			document.getElementById("inpApellido").className = "conError";
+		if(apellido.value==""){
+			apellido.className = "conError";
 		}else{
-			document.getElementById("inpApellido").className = "sinError";
+			apellido.className = "sinError";
+		}
+		if(telefono.value==""){
+			telefono.className = "conError";
+		}else{
+			telefono.className = "sinError";
 		}
 	}
 }
@@ -116,7 +111,38 @@ function borrar(event){
 	event.preventDefault();
 	var elemento = event.target;
 	var tr = elemento.parentNode.parentNode;
+	var tds = tr.children;
+	var persona = {};
+	for(i=0; i< tds.length-1;i++){
+		persona[tds[i].getAttribute("name")]=tds[i].innerHTML;
+	}
 	tr.parentNode.removeChild(tr);
+	borrarPersonaLocalStorage(persona);
+}
+
+function modificar(event){
+	document.getElementById("btnAgregar").hidden = true;
+	document.getElementById("divAgregar").hidden = false;
+	document.getElementById("btnGuardar").removeEventListener("click", guardar);
+	document.getElementById("btnGuardar").addEventListener
+}
+
+
+function borrarPersonaLocalStorage(persona){
+	listaPersonas = JSON.parse(localStorage.getItem("personas"));
+	for(i=0;i<listaPersonas.length;i++){
+		if(JSON.stringify(listaPersonas[i]) == JSON.stringify(persona)){
+			listaPersonas.splice(i, 1);
+			break;
+		}
+	}
+	localStorage.setItem("personas", JSON.stringify(listaPersonas));
+}
+
+function agregarPersonaLocalStorage(persona){
+	listaPersonas = JSON.parse(localStorage.getItem("personas"));
+	listaPersonas.push(persona);
+	localStorage.setItem("personas", JSON.stringify(listaPersonas));
 }
 
 function cerrar(){
