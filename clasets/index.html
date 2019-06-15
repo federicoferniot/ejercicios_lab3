@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="./animal.js"></script>
+	<script src="./perro.js"></script>
+	<script src="./gato.js"></script>
+	<script src="./ejemplo.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <main>
+		<div class="form-group">
+			<label for="controlSelect">Seleccione tipo de animal</label>
+			<select name="controlSelect" id="tipo" class="form-control">
+				<option value="1">Perro</option>
+				<option value="2">Gato</option>
+			</select>
+			<label for="user" class="colt-sm-3 col-form-label">Nombre:</label>
+			<div class="col-lg-9">
+				<input type="text" class="form-control" id="nombre">
+			</div>
+			<button id="agregarBtn" class="btn btn-success">Agregar</button>
+		</div>
+		<div class="container">
+			<h1>Animales</h1>
+			<table id="animales" class="table">
+				<thead class="thead-light">
+				<tr>
+					<th>Nombre</th>
+					<th>Tipo</th>
+				</tr>
+				</thead>
+				<tbody id="animalesBody">
+				</tbody>
+			</table>
+		</div>
+	</main>
+</body>
+</html>

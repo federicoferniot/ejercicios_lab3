@@ -1,0 +1,5 @@
+npm init -y
+
+tsc --init
+
+tsc archivo1.ts -w target:es5
