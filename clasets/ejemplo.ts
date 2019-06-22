@@ -1,3 +1,5 @@
+import * as $ from "jquery";
+
 $(document).ready(function(){
     $('#agregarBtn').click(agregar);
 });

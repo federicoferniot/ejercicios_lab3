@@ -2,4 +2,6 @@ npm init -y
 
 tsc --init
 
+npm install @types/jquery
+
 tsc archivo1.ts -w target:es5
