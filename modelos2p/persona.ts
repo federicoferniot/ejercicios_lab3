@@ -1,8 +1,8 @@
 namespace ABMEmpleados{
     export class Persona{
-        nombre: string;
-        apellido: string;
-        edad: number;
+        public nombre: string;
+        public apellido: string;
+        public edad: number;
 
         constructor(nombre:string, apellido:string, edad: number){
             this.nombre = nombre;

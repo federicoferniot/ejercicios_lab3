@@ -1,9 +1,13 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = require("jquery");
+﻿"use strict";
 $(document).ready(function () {
-    $('#guardarBtn').on("click", function (event) {
+    ABMEmpleados.Manejadora.mostrarEmpleados();
+    ABMEmpleados.Manejadora.limpiarFormulario();
+    $('#filtrarNombre').on("click", function (event) {
         event.preventDefault();
-        ABMEmpleados.Manejadora.agregarEmpleado();
+        ABMEmpleados.Manejadora.soloNombreYApellido();
+    });
+    $('#btnFiltrarHorario').on("click", function (event) {
+        event.preventDefault();
+        ABMEmpleados.Manejadora.filtrarPorHorario();
     });
 });
