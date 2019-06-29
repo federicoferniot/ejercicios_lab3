@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ABM Vehiculos</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./script/Vehiculo.js"></script>
+    <script src="./script/Auto.js"></script>
+    <script src="./script/Camioneta.js"></script>
+    <script src="./script/manejadora.js"></script>
+    <script src="./script/index.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="https://kit.fontawesome.com/4f1828978b.js"></script>
+</head>
+<body>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- enlaces -->
+            <div class="collapse navbar-collapse" id="opciones">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a id="alta" class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Alta</a>
+                </li>
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Ver</a>
+                        <div class="dropdown-menu">
+                            <a id="autos" class="dropdown-item" href="#">Autos</a>
+                            <a id="camionetas" class="dropdown-item" href="#">Camionetas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a id="limpiar" class="nav-link" href="#" >Limpiar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="promedio" class="nav-link" href="#" >Promedio</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container py-2">
+            <div class="col-md-12 boxlayout">
+                <fieldset disabled>
+                    <div class="form-group row">
+                        <label for="Id" class="col-lg-2 col-form-label" disabled>Promedio:</label>
+                        <input type="text" class="col-lg-3" class="form-control" id="promedioInp">
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="container py-2">
+                <div class="col-md-12 boxlayout">
+                    <table class="table table-striped">
+                    <thead>
+                        <tr>
+                        <th id='thId'>Id</th>
+                        <th id='thMarca'>Marca</th>
+                        <th id='thModelo'>Modelo</th>
+                        <th id='thPrecio'>Precio</th>
+                        <th id='thAccion'>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Alta Vehiculo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <fieldset disabled>
+                        <div class="form-group row">
+                        <label for="Id" class="col-lg-3 col-form-label" disabled>Id:</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" id="Id">
+                        </div>
+                        </div>
+                        </fieldset>
+                        <div class="form-group row">
+                        <label for="Marca" class="col-lg-3 col-form-label">Marca:</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" id="Marca" required>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                        <label for="Modelo" class="col-lg-3 col-form-label">Modelo:</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" id="Modelo" required>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                        <label for="Precio" class="col-lg-3 col-form-label">Precio:</label>
+                        <div class="col-lg-9">
+                            <input type="number" class="form-control" id="Precio" required>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                        <label for="Tipo" class="col-lg-3 col-form-label">Tipo:</label>
+                        <div class="col-lg-9">
+                            <select name="Tipo" id="Tipo" class="form-control" required>
+                                <option value="Camioneta">Camioneta</option>
+                                <option value="Auto">Auto</option>
+                            </select>
+                        </div>
+                        <label for="Puertas" id='lblPuertas' class="col-lg-3 col-form-label" >Puertas:</label>
+                        <div class="col-lg-9" >
+                            <select name="Puertas" id="Puertas" class="form-control" required>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <label for="cuatroXcuatro" id='lblCuatroXCuatro' class="col-lg-3 col-form-label" >4x4:</label>
+                        <div class="col-lg-9" >
+                            <select name="cuatroXcuatro" id="cuatroXcuatro" class="form-control" required>
+                                <option value="true">Si</option>
+                                <option value="">No</option>
+                            </select>
+                        </div>
+                        <div class="row px-5">
+                                <div class="offset-lg-3 col-lg-9 py-3">
+                                    <button id="guardarBtn" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        </form>
+                </div>
+                </div>
+                </form>
+            </div>
+        </div>
+
+</body>
+</html>
